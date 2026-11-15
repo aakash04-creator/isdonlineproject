@@ -62,3 +62,4 @@ namespace BoxCrafter.Core
         }
     }
 }
+

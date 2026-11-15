@@ -16,3 +16,4 @@ This project, **BoxCrafter 3D**, is based on and inspired by initial architectur
    - WebGL / Web-playable interactive 3D implementation with procedural Web Audio synthesis and particle systems.
    - Production C# game architecture and automated testing suite.
 3. **Removal of Unused Assets**: Removed default tutorial files and unreferenced template documentation from the original repository to improve project hygiene.
+

@@ -74,3 +74,4 @@ namespace BoxCrafter.Core
         }
     }
 }
+

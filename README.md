@@ -133,3 +133,4 @@ isd/
   - Base project template configurations provided by **Unity Technologies**.
   - All gameplay logic, 3D isometric canvas engine, procedural Web Audio synthesizer, levels, and C# mechanics authored by the BoxCrafter 3D contributors.
   - See [NOTICE.md](NOTICE.md) for full attribution details.
+

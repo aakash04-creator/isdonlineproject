@@ -489,3 +489,4 @@ class IsometricRenderer {
 }
 
 window.IsometricRenderer = IsometricRenderer;
+
