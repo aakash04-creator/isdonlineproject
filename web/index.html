@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BoxCrafter 3D | Kinetic Cube Odyssey</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- 3D Canvas -->
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- UI Overlay Layer -->
+        <div class="ui-layer">
+            <!-- Top Navigation & Controls -->
+            <header class="header-bar interactive">
+                <div class="brand-section">
+                    <div class="brand-logo">📦</div>
+                    <h1 class="brand-title">BoxCrafter 3D</h1>
+                </div>
+
+                <!-- Mode Switcher -->
+                <nav class="mode-switcher">
+                    <button class="mode-tab active" data-mode="puzzle">Cube Puzzle</button>
+                    <button class="mode-tab" data-mode="runner">Cyber Dash</button>
+                    <button class="mode-tab" data-mode="stacker">Tower Stacker</button>
+                </nav>
+
+                <!-- Settings Controls -->
+                <div class="header-controls">
+                    <select id="themeSelect" class="theme-dropdown" aria-label="Visual Theme">
+                        <option value="cyber">Cyber Neon</option>
+                        <option value="solar">Solar Dawn</option>
+                        <option value="matrix">Matrix Green</option>
+                        <option value="minimal">Minimal Dark</option>
+                    </select>
+                    <button id="btnMute" class="icon-btn" title="Toggle Audio (M)">🔊</button>
+                    <button id="btnHelp" class="icon-btn" title="Controls & Help (?)">?</button>
+                </div>
+            </header>
+
+            <!-- Level Info & Objectives -->
+            <div class="level-banner interactive">
+                <div id="levelName" class="level-name">Stage 01: Neon Awakening</div>
+                <div id="levelHint" class="level-hint">Roll with WASD/Arrows. Push the amber crate onto the red pressure plate!</div>
+
+                <!-- Stats Bar -->
+                <div class="stats-bar">
+                    <div class="stat-pill">
+                        <span class="stat-label">Moves</span>
+                        <span id="movesCount" class="stat-val">0</span>
+                    </div>
+                    <div class="stat-pill">
+                        <span class="stat-label">Cores</span>
+                        <span id="gemsCount" class="stat-val">0/1</span>
+                    </div>
+                    <div class="stat-pill">
+                        <span class="stat-label">Time</span>
+                        <span id="gameTimer" class="stat-val">00:00</span>
+                    </div>
+                    <div class="stat-pill">
+                        <span class="stat-label">Score</span>
+                        <span id="scoreDisplay" class="stat-val">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Control Bar -->
+            <footer class="bottom-bar">
+                <div class="action-buttons interactive">
+                    <button id="btnUndo" class="btn" title="Undo Move (U / Ctrl+Z)">↩ Undo</button>
+                    <button id="btnRestart" class="btn" title="Restart Level (R)">🔄 Restart</button>
+                </div>
+
+                <!-- Mobile Virtual Controls -->
+                <div class="mobile-controls interactive">
+                    <div class="dpad">
+                        <button id="dpadUp" class="dpad-btn dpad-up" aria-label="Up">▲</button>
+                        <button id="dpadLeft" class="dpad-btn dpad-left" aria-label="Left">◀</button>
+                        <button id="dpadDown" class="dpad-btn dpad-down" aria-label="Down">▼</button>
+                        <button id="dpadRight" class="dpad-btn dpad-right" aria-label="Right">▶</button>
+                    </div>
+                    <div class="action-pad">
+                        <button id="btnAction" class="action-round-btn" aria-label="Jump / Action">JUMP</button>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Help Modal -->
+        <div id="modalHelp" class="modal-overlay">
+            <div class="modal-card">
+                <h2 class="modal-title">How To Play</h2>
+                <div class="controls-list">
+                    <p><span class="key-badge">W / A / S / D</span> or <span class="key-badge">Arrows</span> : Roll Box</p>
+                    <p><span class="key-badge">Spacebar</span> : Jump / Action</p>
+                    <p><span class="key-badge">U</span> or <span class="key-badge">Ctrl + Z</span> : Undo Move</p>
+                    <p><span class="key-badge">R</span> : Restart Current Level</p>
+                    <p><span class="key-badge">M</span> : Mute Audio</p>
+                </div>
+                <p class="modal-text">Push amber crates onto red pressure plates to unlock objectives. Avoid lasers, collect yellow energy cores, and solve puzzles in the fewest moves!</p>
+                <button id="btnCloseHelp" class="btn btn-primary" style="width: 100%; justify-content: center;">Got It!</button>
+            </div>
+        </div>
+
+        <!-- Victory Modal -->
+        <div id="modalVictory" class="modal-overlay">
+            <div class="modal-card">
+                <h2 class="modal-title">🎉 Stage Complete!</h2>
+                <p class="modal-text">All pressure plates activated and objectives cleared.</p>
+                <div class="stats-grid">
+                    <div class="stats-box">
+                        <div id="victoryMoves" class="stats-box-val">0</div>
+                        <div class="stats-box-lbl">Moves</div>
+                    </div>
+                    <div id="statsBoxTime" class="stats-box">
+                        <div id="victoryTime" class="stats-box-val">0s</div>
+                        <div class="stats-box-lbl">Time</div>
+                    </div>
+                    <div class="stats-box">
+                        <div id="victoryScore" class="stats-box-val">0</div>
+                        <div class="stats-box-lbl">Score</div>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: center;">
+                    <button id="btnPlayAgain" class="btn" style="flex: 1; justify-content: center;">Replay</button>
+                    <button id="btnNextLevel" class="btn btn-primary" style="flex: 1; justify-content: center;">Next Stage ➔</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/audio.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/levels.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
