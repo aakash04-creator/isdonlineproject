@@ -1,0 +1,27 @@
+{
+  "name": "boxcrafter-3d",
+  "version": "1.0.0",
+  "description": "A stylish, physics-based 3D kinetic box puzzle and arcade game with isometric rendering, procedural Web Audio, and Unity 6 URP architecture.",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve . -l 3000",
+    "test": "node tests/game_logic_test.js"
+  },
+  "keywords": [
+    "game",
+    "unity",
+    "unity6",
+    "urp",
+    "3d",
+    "isometric",
+    "sokoban",
+    "puzzle",
+    "cyberpunk",
+    "physics",
+    "canvas",
+    "webgl",
+    "web-audio"
+  ],
+  "author": "Aakash (with reference attribution to Abhay750/box_game)",
+  "license": "MIT"
+}
